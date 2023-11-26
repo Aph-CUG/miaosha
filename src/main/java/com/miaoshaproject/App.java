@@ -34,8 +34,6 @@ public class App
         } else {
             return userDO.getName();
         }
-
-
     }
 
     public static void main( String[] args )
