@@ -1,12 +1,11 @@
 package com.miaoshaproject.service.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-/**
- * Created by hzllb on 2018/11/18.
- */
+
 //用户下单的交易模型
-public class OrderModel {
+public class OrderModel implements Serializable {
     //2018102100012828
     private String id;
 
