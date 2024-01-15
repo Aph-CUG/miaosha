@@ -83,7 +83,7 @@ public class UserServiceImpl implements UserService {
             throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR,"手机号已重复注册");
         }
 
-
+        //userDO = userDOMapper.selectByPrimaryKey()
 
         userModel.setId(userDO.getId());
 

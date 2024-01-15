@@ -50,6 +50,8 @@ public class OrderController extends BaseController {
 
     @PostConstruct
     public void init(){
+
+        // 尽量采用ThreadPoolExecutor， 防止内存溢出
         executorService = Executors.newFixedThreadPool(20);
 
         orderCreateRateLimiter = RateLimiter.create(300);
@@ -121,7 +123,7 @@ public class OrderController extends BaseController {
         //UserModel userModel = (UserModel)httpServletRequest.getSession().getAttribute("LOGIN_USER");
 
         //OrderModel orderModel = orderService.createOrder(userModel.getId(),itemId,promoId,amount);
-
+        //TODO: 销量异步化
         //加入库存流水init状态
         //同步调用线程池的submit方法
         //拥塞窗口为20的等待队列，用来队列化泄洪

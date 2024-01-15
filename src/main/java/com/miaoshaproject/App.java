@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,9 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
  *
  */
 
-
+@EnableCaching
 @SpringBootApplication(scanBasePackages = {"com.miaoshaproject"})
 @RestController
+@EnableAspectJAutoProxy
 @MapperScan("com.miaoshaproject.dao")
 
 public class App 

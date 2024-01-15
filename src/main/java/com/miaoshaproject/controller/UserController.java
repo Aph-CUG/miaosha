@@ -53,6 +53,7 @@ public class UserController  extends BaseController{
                                      @RequestParam(name="password")String password) throws BusinessException, UnsupportedEncodingException, NoSuchAlgorithmException {
         //验证手机号和对应的otpcode相符合
         String inSessionOtpCode = (String) this.httpServletRequest.getSession().getAttribute(telphone);
+        //String inSessionOtpCode = (String) redisTemplate.opsForValue().get(telphone);
         if(!com.alibaba.druid.util.StringUtils.equals(otpCode,inSessionOtpCode)){
             throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR,"短信验证码不符合");
         }
@@ -92,7 +93,7 @@ public class UserController  extends BaseController{
         //将OTP验证码同对应用户的手机号关联，使用httpsession的方式绑定他的手机号与OTPCODE
         //REDIS天然适合
         httpServletRequest.getSession().setAttribute(telphone,otpCode);
-
+        //redisTemplate.opsForValue().set(telphone,otpCode);
 
 
         //将OTP验证码通过短信通道发送给用户,省略

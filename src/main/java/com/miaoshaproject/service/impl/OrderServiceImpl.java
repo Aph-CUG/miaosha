@@ -78,6 +78,7 @@ public class OrderServiceImpl implements OrderService {
 //        }
 
         //2.落单减库存
+        //TODO: 前端扣减库存数量
         boolean result = itemService.decreaseStock(itemId,amount);
         if(!result){
             throw new BusinessException(EmBusinessError.STOCK_NOT_ENOUGH);
@@ -96,7 +97,7 @@ public class OrderServiceImpl implements OrderService {
         orderModel.setPromoId(promoId);
         orderModel.setOrderPrice(orderModel.getItemPrice().multiply(new BigDecimal(amount)));
 
-        //生成交易流水号,订单号
+        //生成交易流水号,订单号   //TODO: 分布式ID
         orderModel.setId(generateOrderNo());
         OrderDO orderDO = convertFromOrderModel(orderModel);
         orderDOMapper.insertSelective(orderDO);
@@ -130,7 +131,7 @@ public class OrderServiceImpl implements OrderService {
         stringBuilder.append(nowDate);
 
         //中间6位为自增序列
-        //获取当前sequence
+        //获取当前sequence          //TODO: 每次上锁for update效率低， 待优化
         int sequence = 0;
         SequenceDO sequenceDO =  sequenceDOMapper.getSequenceByName("order_info");
         sequence = sequenceDO.getCurrentValue();
@@ -143,7 +144,7 @@ public class OrderServiceImpl implements OrderService {
         stringBuilder.append(sequenceStr);
 
 
-        //最后2位为分库分表位,暂时写死
+        //TODO:最后2位为分库分表位,暂时写死
         stringBuilder.append("00");
 
         return stringBuilder.toString();
